@@ -24,6 +24,10 @@ function App() {
             <Info></Info>
           </Route>
 
+          <Route exact path = "/info/:id/:color/:width">
+            <Info></Info>
+          </Route>
+
         </Switch>
 
        
