@@ -35,5 +35,28 @@ app.post("/api/quotes", (req,res)=> {
     })
 })
 
+app.get("/api/quotes/:idx", (req,res)=> {
+    console.log("request params is this--->", req.params)
+    res.json({
+        data: quotesTable[req.params.idx]
+    })
+})
+
+app.put("/api/quotes/:idx", (req,res)=>{
+    quotesTable[req.params.idx] = req.body
+    res.json({
+        count: quotesTable.length,
+        data: quotesTable
+    })
+})
+
+app.delete("/api/quotes/:idx", (req,res)=>{
+    quotesTable.splice(req.params.idx, 1)
+    res.json({
+        count: quotesTable.length,
+        data: quotesTable
+    })
+})
+
 
 app.listen( port, () => console.log(`Listening on port: ${port}`) );
