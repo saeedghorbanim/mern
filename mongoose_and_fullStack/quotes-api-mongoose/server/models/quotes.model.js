@@ -6,7 +6,7 @@ const QuotesSchema = new mongoose.Schema({
     content: {
         type: String,
         required: [true, "Quote content is required:"],
-        min: [5, "quote content must be at least 5 characters"]
+        minlength: [5, "quote content must be at least 5 characters"]
     },
     author: {
         type: String,
