@@ -1,4 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); //mongoose an interface to mongo db
+//meaning that we can use mongoose to allow us to do crud commands and other
+//db commands without doing the mongodb commands and instead we can use javascript
  
 
 const NinjaSchema = new mongoose.Schema({
