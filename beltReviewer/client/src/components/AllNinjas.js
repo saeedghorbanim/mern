@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom";
-import { useHistory } from 'react-router-dom';
+
 
 
 const AllNinjas = () => {
 
     const [allNinjas, setAllNinjas] = useState([])
+    //state variable to track if delete is clicked so that if it is, the component can rerender
     const [deleteClicked, setDeleteClicked] = useState(false)
-    const history = useHistory();
+
 
     //call the api upon initial rendering of the component and save the array of ninjas into my variable to store all the ninjas in
     useEffect(()=>{
@@ -27,7 +28,6 @@ const AllNinjas = () => {
             .then(res=>{
                 console.log("response after axios delete-->", res)
                 setDeleteClicked(!deleteClicked)
-                history.push("/")
             })
             .catch(err=>console.log("errrrrr when deleting-->", err))
     }
