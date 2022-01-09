@@ -12,11 +12,13 @@ function calculator(){
             if(!isNaN(input_split[i])) {
                 stack.push(input_split[i]);
             }
-            else {
-                var pop_first = stack.pop();
-                var pop_second = stack.pop();
+
+            if(stack.length > 1) {
 
                 if(input_split[i] === "+") {
+                    var pop_first = stack.pop();
+                    var pop_second = stack.pop();
+                    
                     stack.push(parseInt(pop_first) + parseInt(pop_second));
                 }
 
@@ -29,7 +31,7 @@ function calculator(){
                 }
 
                 else if(input_split[i] === "/") {
-                    if(parseInt(pop_second) === 0){
+                    if(parseInt(pop_first) === 0){
                         console.log("You are trying to divide by 0 which doesn't work")
                     }
                     else{
@@ -41,7 +43,7 @@ function calculator(){
         }
 
         if(stack.length > 1) {
-            return "error"
+            return "error, stack has more than 1 index in it"
         }
         else {
             return stack[0];
@@ -64,14 +66,16 @@ while(true){
     const prompt = require('prompt-sync')({sigint:true});
     user_input = prompt("> ");
 
-    if(user_input === "q" || user_input === "exit" || user_input === "clear"){
+    if(user_input.toUpperCase() === "Q" || user_input.toUpperCase() === "EXIT" || user_input.toUpperCase() === "CLEAR"){
         console.log("Exited Calculator")
         break;
     }
 
     else if(user_input === "") {
-        console.log("You have not inputed anything \n\ please input a number")
+        console.log("You have not inputted anything \n\ please input a number")
     }
+
+
 
     else {
         console.log(ms.solving_function(user_input))
