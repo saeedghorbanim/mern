@@ -1,55 +1,51 @@
 function calculator(){
 
     this.solving_function = (input) => {
-        
-        let stack = [];
-        var input_split = input.split("/ +/").map(function(item) {
-            return item.trim();
+        var input_split = input.split(" ");
+       
+        input_split.forEach(function(value){
+
+            if(!isNaN(value) &&  value != "") {
+                stack.push(value);
+
+            } else if (value == "+" && stack.length > 1) {
+                var firstPop = stack.pop();
+                var secondPop = stack.pop();
+                stack.push((firstPop*1000 + secondPop*1000)/1000)
+
+            } else if (value == "-" && stack.length > 1) {
+                firstPop = stack.pop();
+                secondPop = stack.pop();
+                stack.push((secondPop*1000 - firstPop*1000)/1000)
+
+            } else if (value == "*" && stack.length > 1) {
+                firstPop = stack.pop();
+                secondPop = stack.pop();
+                stack.push(firstPop * secondPop)
+            }
+            else if (value == "/" && stack.length > 1) {
+                firstPop = stack.pop();
+                if(firstPop == 0) {
+                    console.log("you are dividing by 0 which gives an error \n please insert a valid number to divide by \n")
+                } 
+                else {
+                    secondPop = stack.pop();
+                    stack.push(secondPop / firstPop)
+                }
+            }
+            
         });
-        input_split = input_split[0].split(" ");
-        
-        for(var i = 0; i < input_split.length; i++) {
-            if(!isNaN(input_split[i])) {
-                stack.push(input_split[i]);
-            }
 
-            if(stack.length > 1) {
-
-                if(input_split[i] === "+") {
-                    var pop_first = stack.pop();
-                    var pop_second = stack.pop();
-                    
-                    stack.push(parseInt(pop_first) + parseInt(pop_second));
-                }
-
-                else if(input_split[i] === "-") {
-                    stack.push(parseInt(pop_second) - parseInt(pop_first));
-                }
-
-                else if(input_split[i] === "*") {
-                    stack.push(parseInt(pop_first) * parseInt(pop_second));
-                }
-
-                else if(input_split[i] === "/") {
-                    if(parseInt(pop_first) === 0){
-                        console.log("You are trying to divide by 0 which doesn't work")
-                    }
-                    else{
-                        stack.push(parseInt(pop_second) / parseInt(pop_first));
-                    }
-                }
-
-            }
-        }
-
-        if(stack.length > 1) {
-            return "error, stack has more than 1 index in it"
+        if(stack.length > 0) {
+            return stack[stack.length - 1];
         }
         else {
-            return stack[0];
+            return "Calculator has a clean screen, please input valid numbers to calculate"
         }
     }
 }
+
+
 
 
 String.prototype.Number = function() {
@@ -58,13 +54,17 @@ String.prototype.Number = function() {
 }
 
 var ms = new calculator;
+var stack = []
 
-// console.log(ms.solving_function("        6 3 6 5 * - +    "));
+console.log ('\n',"Welcome to the calculator.",'\n',"In order to use it, please insert two numbers and then the operator '+,-,*,/'", '\n', "To exit, type either one of these commandes: 'q' 'exit' '^c' '^d'", '\n')
 
 while(true){
    
     const prompt = require('prompt-sync')({sigint:true});
     user_input = prompt("> ");
+
+    const mixedInputs = user_input.search();
+    const letters = user_input.search();
 
     if(user_input.toUpperCase() === "Q" || user_input.toUpperCase() === "EXIT" || user_input.toUpperCase() === "CLEAR"){
         console.log("Exited Calculator")
@@ -75,7 +75,13 @@ while(true){
         console.log("You have not inputted anything \n\ please input a number")
     }
 
+    else if(mixedInputs) {
+        console.log("Please insert numbers first than mathmatical signs (+ - * /) at the end")
+    }
 
+    else if(letters) {
+        console.log("Please do not insert any letters at all")
+    }
 
     else {
         console.log(ms.solving_function(user_input))
@@ -94,9 +100,6 @@ while(true){
 
 
 
-// console.log ('\n',"Welcome to the calculator. please input a number",'\n','\n', "to exit, type either one of these commandes: q  exit ^c ^d")
 
-// const prompt = require('prompt-sync')({sigint:true});
-// user_input = prompt("> ");
 
 
