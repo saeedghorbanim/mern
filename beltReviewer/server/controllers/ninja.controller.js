@@ -4,6 +4,8 @@ const Ninja = require("../models/ninja.model");
 
 module.exports.findAllNinjas = (req, res)=> {
     //looks to find all Quotes
+    //the find method is a built-in method getting it from the model which is 
+    //Ninja (created a model instance up top)
     Ninja.find()
         .then(allNinjas=>{
             res.json({results: allNinjas})
@@ -14,6 +16,8 @@ module.exports.findAllNinjas = (req, res)=> {
 }
 
 module.exports.createNewNinja = (req, res)=> {
+    //req.body is requesting data to post into the database from postman or front-end form
+    //so basically it creates a new user or information in the database
     Ninja.create(req.body)
         .then(newNinjaobj=>{
             res.json({results: newNinjaobj})
@@ -25,6 +29,8 @@ module.exports.createNewNinja = (req, res)=> {
 
 
 module.exports.findOneNinja = (req, res) => {
+    //getting a ninja from its id through mongo (in mongoose we use _id as the id indicater)
+    //req.params.id is gaining the id from the url route to find it from the database
     Ninja.findOne({_id:req.params.id})
         .then(foundNinja=>{
             res.json({results: foundNinja})
