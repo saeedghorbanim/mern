@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 
 const AllNinjas = () => {
 
+    //state variable to get the list of all ninjas from the database in order to forward the info to the webpage
     const [allNinjas, setAllNinjas] = useState([])
     //state variable to track if delete is clicked so that if it is, the component can rerender
     const [deleteClicked, setDeleteClicked] = useState(false)

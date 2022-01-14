@@ -23,6 +23,7 @@ module.exports.createNewNinja = (req, res)=> {
         })
 }
 
+
 module.exports.findOneNinja = (req, res) => {
     Ninja.findOne({_id:req.params.id})
         .then(foundNinja=>{
